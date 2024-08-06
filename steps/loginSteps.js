@@ -1,5 +1,5 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { expect } from "@playwright/test";
+import { errors, expect } from "@playwright/test";
 import { BrowserUtility } from "../utilities/BrowserUtility.js";
 import { PageManager } from "../globalPagesSetup.js";
 
@@ -43,3 +43,39 @@ Then("user login succussfully to the homepage", async function () {
   
   // await BrowserUtility.sleep(2);
 });
+
+
+
+
+When('user enters invalid username {string}', async function (string) {
+  await PageManager.loginPage.enterUsername(string)
+});
+
+When('user enters invalid password {string}', async function (string) {
+  await PageManager.loginPage.enterPassword(string)
+});
+
+Then('user sees a {string} error pop-up message', async(string)=> {
+ await expect(PageManager.loginPage.errorMessagePrompt).toHaveText(string);
+});
+
+// Then('user sees a Sorry, Wrong Email or Password error pop-up message', async ()=> {
+//   let wrongCredentialErrorMessage ='Sorry, Wrong Email or Password';
+//   await expect( PageManager.loginPage.errorMessagePrompt).toHaveText(wrongCredentialErrorMessage);
+// });
+
+
+/**
+ * Scenario name: Verify users are not allowed to login without any credentials
+ * Step 1: Login
+ * Step 2: Click login button without any credentials
+ * Step 3: Verify error message
+ */
+
+// When('user clicks the login button', async function () {
+//   await PageManager.loginPage.clickLoginButton();
+// });
+
+// Then('user sees a {string} error pop-up message', async(string)=> {
+//   await expect(PageManager.loginPage.errorMessagePrompt).toHaveText(string);
+//  });

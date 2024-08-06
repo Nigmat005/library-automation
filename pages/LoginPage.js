@@ -8,11 +8,16 @@ export class LoginPage extends BasePage {
    */
   constructor(page) {
     super(page);
+    // this.page=page;
     this.usernameInput = page.locator("//input[@id='inputEmail']");
     this.passwordInput = page.locator("//input[@id='inputPassword']");
     this.loginButton = page.locator(
       "//button[text()='Sign in' and @type='submit']"
     );
+    this.errorMessagePrompt=page.locator("//div[@class='alert alert-danger']");
+    // this.errorMessagePrompt=page.locator("//div[text()='Sorry, Wrong Email or Password']");
+
+    
     
   }
 
